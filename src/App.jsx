@@ -124,9 +124,9 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
           </div>
           <div id="Portofolio">
             <Portofolio />
-          </div>
+         {/* </div>
           <div id="Contact">
-            <ContactPage />
+            <ContactPage />*/}
           </div>
           <Footer />
         </div>
