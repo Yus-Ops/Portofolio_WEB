@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Share2, User, Mail, MessageSquare, Send } from "lucide-react";
-import { Link } from "react-router-dom";
 import SocialLinks from "../components/SocialLinks";
 import Komentar from "../components/Commentar";
 import Swal from "sweetalert2";
@@ -44,17 +43,15 @@ const ContactPage = () => {
     });
 
     try {
-      // Ganti dengan email Anda di FormSubmit
       const formSubmitUrl = 'https://formsubmit.co/ekizulfarrachman@gmail.com';
       
-      // Siapkan data form untuk FormSubmit
       const submitData = new FormData();
       submitData.append('name', formData.name);
       submitData.append('email', formData.email);
       submitData.append('message', formData.message);
       submitData.append('_subject', 'Pesan Baru dari Website Portfolio');
-      submitData.append('_captcha', 'false'); // Nonaktifkan captcha
-      submitData.append('_template', 'table'); // Format email sebagai tabel
+      submitData.append('_captcha', 'false');
+      submitData.append('_template', 'table');
 
       await axios.post(formSubmitUrl, submitData, {
         headers: {
@@ -62,12 +59,11 @@ const ContactPage = () => {
         },
       });
 
-     
       Swal.fire({
         title: 'Berhasil!',
         text: 'Pesan Anda telah berhasil terkirim!',
         icon: 'success',
-        confirmButtonColor: '#6366f1',
+        confirmButtonColor: '#10b981',
         timer: 2000,
         timerProgressBar: true
       });
@@ -84,7 +80,7 @@ const ContactPage = () => {
           title: 'Berhasil!',
           text: 'Pesan Anda telah berhasil terkirim!',
           icon: 'success',
-          confirmButtonColor: '#6366f1',
+          confirmButtonColor: '#10b981',
           timer: 2000,
           timerProgressBar: true
         });
@@ -99,7 +95,7 @@ const ContactPage = () => {
           title: 'Gagal!',
           text: 'Terjadi kesalahan. Silakan coba lagi nanti.',
           icon: 'error',
-          confirmButtonColor: '#6366f1'
+          confirmButtonColor: '#10b981'
         });
       }
     } finally {
@@ -108,54 +104,46 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="px-[5%] sm:px-[5%] lg:px-[10%] " >
-      <div className="text-center lg:mt-[5%] mt-10 mb-2 sm:px-0 px-[5%]">
+    <div className="px-[5%] sm:px-[5%] lg:px-[10%] bg-white py-12" >
+      <div className="text-center mb-10">
         <h2
           data-aos="fade-down"
           data-aos-duration="1000"
-          className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]"
+          className="text-4xl md:text-5xl font-bold text-center mx-auto"
         >
-          <span
-            style={{
-              color: "#6366f1",
-              backgroundImage:
-                "linear-gradient(45deg, #6366f1 10%, #a855f7 93%)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500">
             Hubungi Saya
           </span>
         </h2>
         <p
           data-aos="fade-up"
           data-aos-duration="1100"
-          className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2"
+          className="text-slate-600 max-w-2xl mx-auto text-sm md:text-base mt-2"
         >
           Punya pertanyaan? Kirimi saya pesan, dan saya akan segera membalasnya.
         </p>
       </div>
 
       <div
-        className="h-auto py-10 flex items-center justify-center 2xl:pr-[3.1%] lg:pr-[3.8%]  md:px-0"
+        className="h-auto py-10 flex items-center justify-center"
         id="Contact"
       >
-        <div className="container px-[1%] grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-[45%_55%] 2xl:grid-cols-[35%_65%] gap-12" >
+        <div className="container grid grid-cols-1 lg:grid-cols-[45%_55%] gap-8" >
+          {/* Form Kontak */}
           <div
-        
-            className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-5 py-10 sm:p-10 transform transition-all duration-500 hover:shadow-[#6366f1]/10"
+            data-aos="fade-right"
+            className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-emerald-200/50 border border-emerald-100"
           >
             <div className="flex justify-between items-start mb-8">
               <div>
-                <h2 className="text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
+                <h2 className="text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500">
                   Hubungi
                 </h2>
-                <p className="text-gray-400">
+                <p className="text-slate-500">
                   Ada yang ingin didiskusikan? Kirim saya pesan dan mari kita bicara.
                 </p>
               </div>
-              <Share2 className="w-10 h-10 text-[#6366f1] opacity-50" />
+              <Share2 className="w-10 h-10 text-emerald-400 opacity-70" />
             </div>
 
             <form 
@@ -167,7 +155,7 @@ const ContactPage = () => {
                 data-aos-delay="100"
                 className="relative group"
               >
-                <User className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+                <User className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
                 <input
                   type="text"
                   name="name"
@@ -175,7 +163,7 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full p-4 pl-12 bg-white/10 rounded-xl border border-white/20 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 disabled:opacity-50"
+                  className="w-full p-4 pl-12 bg-white rounded-xl border border-slate-200 placeholder-slate-400 text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-all duration-300 hover:border-emerald-300 disabled:opacity-50"
                   required
                 />
               </div>
@@ -184,7 +172,7 @@ const ContactPage = () => {
                 data-aos-delay="200"
                 className="relative group"
               >
-                <Mail className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+                <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
                 <input
                   type="email"
                   name="email"
@@ -192,7 +180,7 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full p-4 pl-12 bg-white/10 rounded-xl border border-white/20 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 disabled:opacity-50"
+                  className="w-full p-4 pl-12 bg-white rounded-xl border border-slate-200 placeholder-slate-400 text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-all duration-300 hover:border-emerald-300 disabled:opacity-50"
                   required
                 />
               </div>
@@ -201,14 +189,14 @@ const ContactPage = () => {
                 data-aos-delay="300"
                 className="relative group"
               >
-                <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+                <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
                 <textarea
                   name="message"
                   placeholder="Pesan Anda"
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full resize-none p-4 pl-12 bg-white/10 rounded-xl border border-white/20 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 h-[9.9rem] disabled:opacity-50"
+                  className="w-full resize-none p-4 pl-12 bg-white rounded-xl border border-slate-200 placeholder-slate-400 text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-all duration-300 hover:border-emerald-300 h-40 disabled:opacity-50"
                   required
                 />
               </div>
@@ -217,19 +205,23 @@ const ContactPage = () => {
                 data-aos-delay="400"
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-[#6366f1]/20 active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-emerald-300/40 active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <Send className="w-5 h-5" />
                 {isSubmitting ? 'Mengirim...' : 'Kirim Pesan'}
               </button>
             </form>
 
-            <div className="mt-10 pt-6 border-t border-white/10 flex justify-center space-x-6">
+            <div className="mt-10 pt-6 border-t border-slate-100 flex justify-center space-x-6">
               <SocialLinks />
             </div>
           </div>
 
-          <div className="  bg-white/5 backdrop-blur-xl rounded-3xl p-3 py-3 md:p-10 md:py-8 shadow-2xl transform transition-all duration-500 hover:shadow-[#6366f1]/10">
+          {/* Bagian Komentar */}
+          <div 
+            data-aos="fade-left"
+            className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-emerald-200/50 border border-emerald-100"
+          >
             <Komentar />
           </div>
         </div>

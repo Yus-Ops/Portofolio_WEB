@@ -21,7 +21,7 @@ const Navbar = () => {
                 if (section) {
                     return {
                         id: item.href.replace("#", ""),
-                        offset: section.offsetTop - 550,
+                        offset: section.offsetTop - 100,
                         height: section.offsetHeight
                     };
                 }
@@ -69,9 +69,9 @@ const Navbar = () => {
         <nav
             className={`fixed w-full top-0 z-50 transition-all duration-500 ${
                 isOpen
-                    ? "bg-[#030014]"
+                    ? "bg-slate-900"
                     : scrolled
-                    ? "bg-[#030014]/50 backdrop-blur-xl"
+                    ? "bg-slate-900/80 backdrop-blur-xl border-b border-slate-700"
                     : "bg-transparent"
             }`}
         >
@@ -82,9 +82,9 @@ const Navbar = () => {
                         <a
                             href="#Home"
                             onClick={(e) => scrollToSection(e, "#Home")}
-                            className="text-xl font-bold bg-gradient-to-r from-[#a855f7] to-[#6366f1] bg-clip-text text-transparent"
+                            className="text-xl font-bold bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent"
                         >
-                            Ekizr
+                            YUS
                         </a>
                     </div>
         
@@ -101,14 +101,14 @@ const Navbar = () => {
                                     <span
                                         className={`relative z-10 transition-colors duration-300 ${
                                             activeSection === item.href.substring(1)
-                                                ? "bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent font-semibold"
-                                                : "text-[#e2d3fd] group-hover:text-white"
+                                                ? "bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent font-semibold"
+                                                : "text-slate-300 group-hover:text-white"
                                         }`}
                                     >
                                         {item.label}
                                     </span>
                                     <span
-                                        className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] transform origin-left transition-transform duration-300 ${
+                                        className={`absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 transform origin-left transition-transform duration-300 ${
                                             activeSection === item.href.substring(1)
                                                 ? "scale-x-100"
                                                 : "scale-x-0 group-hover:scale-x-100"
@@ -123,7 +123,7 @@ const Navbar = () => {
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className={`relative p-2 text-[#e2d3fd] hover:text-white transition-transform duration-300 ease-in-out transform ${
+                            className={`relative p-2 text-slate-300 hover:text-white transition-transform duration-300 ease-in-out transform ${
                                 isOpen ? "rotate-90 scale-125" : "rotate-0 scale-100"
                             }`}
                         >
@@ -153,8 +153,8 @@ const Navbar = () => {
                             onClick={(e) => scrollToSection(e, item.href)}
                             className={`block px-4 py-3 text-lg font-medium transition-all duration-300 ease ${
                                 activeSection === item.href.substring(1)
-                                    ? "bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent font-semibold"
-                                    : "text-[#e2d3fd] hover:text-white"
+                                    ? "bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent font-semibold"
+                                    : "text-slate-300 hover:text-white"
                             }`}
                             style={{
                                 transitionDelay: `${index * 100}ms`,
