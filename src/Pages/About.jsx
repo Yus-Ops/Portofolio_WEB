@@ -166,7 +166,7 @@ const AboutPage = () => {
     const storedProjects = JSON.parse(localStorage.getItem("projects") || "[]");
     const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
     
-    const startDate = new Date("2021-11-06");
+    const startDate = new Date("2024-07-06");
     const today = new Date();
     const experience = today.getFullYear() - startDate.getFullYear() -
       (today < new Date(today.getFullYear(), startDate.getMonth(), startDate.getDate()) ? 1 : 0);
@@ -209,7 +209,7 @@ const AboutPage = () => {
       color: "from-emerald-500 to-cyan-500",
       value: totalProjects,
       label: "Total Projects",
-      description: "Innovative web solutions crafted",
+      description: "Intelligent solutions powered by Machine Learning.",
       animation: "fade-right",
     },
     {
@@ -262,7 +262,7 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-             Seorang lulusan Teknik Jaringan Komputer dan Telekomunikasi yang memiliki ketertarikan besar dalam pengembangan Front-End. Saya berfokus pada menciptakan pengalaman digital yang menarik dan selalu berusaha memberikan solusi terbaik dalam setiap proyek yang saya kerjakan.
+             Saya adalah mahasiswa aktif Teknik Informatika di Universitas Islam Sultan Agung (UNISSULA) yang memiliki ketertarikan besar dalam pengembangan model Machine Learning dan Software Developer. Saya antusias menciptakan pengalaman digital yang interaktif serta terus berupaya mengembangkan solusi inovatif di setiap proyek yang saya kerjakan.
             </p>
 
             {/* Enhanced Quote Section with fixed closing quote */}
@@ -281,7 +281,7 @@ const AboutPage = () => {
                   </svg>
                 </div>
                 <blockquote className="text-white text-lg italic font-medium relative z-10">
-                  "Leveraging AI as a professional tool, not a replacement."
+                  "Building intelligent systems that support decisions — not make them for us."
                 </blockquote>
               </div>
             </div>
@@ -289,7 +289,7 @@ const AboutPage = () => {
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
               <div className="w-full lg:w-auto">
                 <HomeStyleButton 
-                  href="https://drive.google.com/drive/folders/1BOm51Grsabb3zj6Xk27K-iRwI1zITcpo" 
+                  href="" 
                   text="Download CV" 
                   icon={FileText} 
                   isPrimary={true}

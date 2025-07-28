@@ -28,19 +28,19 @@ const Footer = () => {
               </span>
             </h3>
             <p className="text-slate-600 mb-4">
-              Machine Learning Enthusiast & Front-End Developer
+              Machine Learning Enthusiast & Software Developer
             </p>
             <div className="flex space-x-4">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
+              <a href="https://github.com/Yus-Ops" target="_blank" rel="noopener noreferrer" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
                 <Github className="w-5 h-5" />
               </a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
+              <a href="https://linkedin.com/in/yus-ops" target="_blank" rel="noopener noreferrer" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="mailto:youremail@example.com" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yus.ahm399@gmail.com" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
                 <Mail className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
+              <a href="https://instagram.com/scastlivy_" target="_blank" rel="noopener noreferrer" className="bg-emerald-50 p-2 rounded-full text-emerald-600 hover:bg-emerald-100 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -75,15 +75,15 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-emerald-500 mt-0.5" />
-                <span className="text-slate-600">youremail@example.com</span>
+                <span className="text-slate-600">yus.ahm399@gmail.com</span>
               </li>
               <li className="flex items-start gap-3">
                 <svg className="text-emerald-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 19a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2 4.33 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                <span className="text-slate-600">+62 123 4567 8901</span>
+                <span className="text-slate-600">089510208648</span>
               </li>
               <li className="flex items-start gap-3">
                 <svg className="text-emerald-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span className="text-slate-600">Surabaya, Indonesia</span>
+                <span className="text-slate-600">Semarang, Indonesia</span>
               </li>
             </ul>
           </div>

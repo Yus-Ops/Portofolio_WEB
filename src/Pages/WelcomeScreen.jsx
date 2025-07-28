@@ -7,37 +7,40 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [rocketLaunched, setRocketLaunched] = useState(false);
   const [rocketVisible, setRocketVisible] = useState(true);
-  const hasLaunched = useRef(false);
   const lottieRef = useRef(null);
+  const intervalRef = useRef(null);
 
+  // ⏳ Loading logic
   useEffect(() => {
     const totalDuration = 5000;
     const steps = 100;
     const intervalTime = totalDuration / steps;
     const increment = 100 / steps;
 
-    const interval = setInterval(() => {
-      setLoadingProgress(prev => {
-        const newProgress = prev + increment;
+    const timeout = setTimeout(() => {
+      intervalRef.current = setInterval(() => {
+        setLoadingProgress(prev => {
+          const newProgress = prev + increment;
 
-        if (newProgress >= 100 && !hasLaunched.current) {
-          hasLaunched.current = true;
-          setTimeout(() => {
+          if (newProgress >= 100) {
+            clearInterval(intervalRef.current);
             setRocketLaunched(true);
-            setTimeout(() => {
-              setRocketVisible(false);
-            }, 1200);
-          }, 500);
-          return 100;
-        }
+            setTimeout(() => setRocketVisible(false), 1200);
+            return 100;
+          }
 
-        return newProgress;
-      });
-    }, intervalTime);
+          return newProgress;
+        });
+      }, intervalTime);
+    }, 500); // jeda agar roket muncul dulu
 
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(intervalRef.current);
+    };
   }, []);
 
+  // 🔁 Load Lottie player (dengan segments)
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js";
@@ -46,7 +49,7 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
 
     const container = lottieRef.current;
     const player = document.createElement("lottie-player");
-    player.setAttribute("src", ""); // ganti link JSON kamu
+    player.setAttribute("src", "https://raw.githubusercontent.com/Yus-Ops/Portofolio_WEB/main/Rocket%201.json");
     player.setAttribute("background", "transparent");
     player.setAttribute("speed", "1");
     player.setAttribute("loop", "");
@@ -59,20 +62,13 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
     container.appendChild(player);
 
     return () => {
-      container.removeChild(player);
+      container.innerHTML = "";
       document.body.removeChild(script);
     };
   }, []);
 
-  const getRocketY = () => {
-    if (rocketLaunched) return -1000;
-    return -(loadingProgress * 0.5);
-  };
-
-  const getRocketScale = () => {
-    if (rocketLaunched) return 1.2;
-    return 1 + (loadingProgress * 0.001);
-  };
+  const getRocketY = () => rocketLaunched ? -1000 : -(loadingProgress * 0.5);
+  const getRocketScale = () => rocketLaunched ? 1.2 : 1 + (loadingProgress * 0.001);
 
   const handleRocketAnimationComplete = () => {
     if (rocketLaunched) {
@@ -88,12 +84,10 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
           className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center min-h-screen p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{
-            opacity: 0,
-            transition: { duration: 0.3, ease: "easeInOut" }
-          }}
+          exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeInOut" } }}
         >
           <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto">
+            {/* 🚀 Roket */}
             <motion.div
               className="w-40 h-40 sm:w-52 sm:h-52 md:w-64 md:h-64 relative flex-shrink-0"
               initial={{ opacity: 1, y: 0, scale: 1 }}
@@ -109,25 +103,9 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
               onAnimationComplete={handleRocketAnimationComplete}
             >
               <div ref={lottieRef} className="w-full h-full" />
-
-              {loadingProgress > 20 && rocketVisible && !rocketLaunched && (
-                <motion.div
-                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
-                  animate={{
-                    opacity: [0.3, 0.6, 0.3],
-                    scale: [0.8, 1, 0.8]
-                  }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                >
-                  <div className="w-4 h-8 bg-gradient-to-t from-orange-400 to-yellow-300 rounded-full blur-sm"></div>
-                </motion.div>
-              )}
             </motion.div>
 
+            {/* 👋 Teks Selamat Datang */}
             <motion.div
               className="text-center mt-4 sm:mt-6"
               animate={rocketLaunched ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
@@ -137,15 +115,15 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
                 Hello there 👋
               </h1>
               <p className="text-slate-600 text-xs sm:text-sm md:text-base">
-                {loadingProgress >= 100 
-                  ? 'Ready to Launch!' 
-                  : loadingProgress > 50 
-                    ? 'Almost there...' 
-                    : 'Getting the website ready..'
-                }
+                {loadingProgress >= 100
+                  ? 'Ready to Launch!'
+                  : loadingProgress > 50
+                    ? 'Almost there...'
+                    : 'Getting the website ready..'}
               </p>
             </motion.div>
 
+            {/* 🔋 Progress Bar */}
             <motion.div
               className="w-full px-2 sm:px-4 mt-6 sm:mt-8"
               animate={rocketLaunched ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
@@ -156,17 +134,12 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
                   className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full relative"
                   initial={{ width: 0 }}
                   animate={{ width: `${loadingProgress}%` }}
-                  transition={{
-                    duration: 0.1,
-                    ease: "easeOut"
-                  }}
+                  transition={{ duration: 0.1, ease: "easeOut" }}
                 >
                   {loadingProgress < 100 && (
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30"
-                      animate={{
-                        x: ['-100%', '100%']
-                      }}
+                      animate={{ x: ['-100%', '100%'] }}
                       transition={{
                         duration: 1.5,
                         repeat: Infinity,
@@ -174,37 +147,30 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
                       }}
                     />
                   )}
-
                   {loadingProgress > 80 && (
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"
-                      animate={{
-                        opacity: [0.5, 1, 0.5]
-                      }}
-                      transition={{
-                        duration: 0.8,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
                     />
                   )}
                 </motion.div>
               </div>
               <div className="flex justify-between mt-2 text-xs sm:text-sm text-slate-500">
                 <span>
-                  {loadingProgress >= 100 
-                    ? 'Launch Ready!' 
-                    : loadingProgress > 75 
-                      ? 'Finalizing...' 
-                      : loadingProgress > 25 
-                        ? 'Loading...' 
-                        : 'Initializing...'
-                  }
+                  {loadingProgress >= 100
+                    ? 'Launch Ready!'
+                    : loadingProgress > 75
+                      ? 'Finalizing...'
+                      : loadingProgress > 25
+                        ? 'Loading...'
+                        : 'Initializing...'}
                 </span>
                 <span>{Math.min(100, Math.round(loadingProgress))}%</span>
               </div>
             </motion.div>
 
+            {/* ✨ Sparkle */}
             <AnimatePresence>
               {loadingProgress < 100 && (
                 <motion.div
@@ -227,16 +193,14 @@ const WelcomeScreen = ({ onLoadingComplete }) => {
               )}
             </AnimatePresence>
 
+            {/* 🎯 Launch Message */}
             {loadingProgress >= 100 && !rocketLaunched && (
               <motion.div
                 className="mt-6 sm:mt-8 text-center"
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ 
-                  opacity: 1, 
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{ 
-                  duration: 0.5, 
+                animate={{ opacity: 1, scale: [1, 1.05, 1] }}
+                transition={{
+                  duration: 0.5,
                   ease: "easeOut",
                   scale: {
                     duration: 1,

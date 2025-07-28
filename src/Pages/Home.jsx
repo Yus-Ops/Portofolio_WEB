@@ -83,9 +83,9 @@ const PAUSE_DURATION = 2000;
 const WORDS = ["Computer Science Student", "Machine Learning Enthusiast"];
 const TECH_STACK = ["Python", "Scikit-Learn", "TensorFlow", "Flask"];
 const SOCIAL_LINKS = [
-  { icon: Github, link: " " },
-  { icon: Linkedin, link: " " },
-  { icon: Instagram, link: " " }
+  { icon: Github, link: " https://github.com/Yus-Ops" },
+  { icon: Linkedin, link: "https://www.linkedin.com/in/yus-ops/" },
+  { icon: Instagram, link: "https://www.instagram.com/scastlivy_" }
 ];
 
 const Home = () => {
