@@ -10,46 +10,49 @@ const Navbar = () => {
         { href: "#Home", label: "Home" },
         { href: "#About", label: "About" },
         { href: "#Portofolio", label: "Portofolio" },
-        { href: "#Contact", label: "Contact" },
+        { href: "#Footer", label: "Contact" },
     ];
+useEffect(() => {
+    const handleScroll = () => {
+        setScrolled(window.scrollY > 20);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-            const sections = navItems.map(item => {
-                const section = document.querySelector(item.href);
-                if (section) {
-                    return {
-                        id: item.href.replace("#", ""),
-                        offset: section.offsetTop - 100,
-                        height: section.offsetHeight
-                    };
-                }
-                return null;
-            }).filter(Boolean);
-
-            const currentPosition = window.scrollY;
-            const active = sections.find(section => 
-                currentPosition >= section.offset && 
-                currentPosition < section.offset + section.height
-            );
-
-            if (active) {
-                setActiveSection(active.id);
+        const sections = navItems.map(item => {
+            const section = document.querySelector(item.href);
+            if (section) {
+                return {
+                    id: item.href.replace("#", ""),
+                    offset: section.offsetTop - 140, // sedikit diperbesar supaya lebih akurat
+                    height: section.offsetHeight
+                };
             }
-        };
+            return null;
+        }).filter(Boolean);
 
-        window.addEventListener("scroll", handleScroll);
-        handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+        const currentPosition = window.scrollY;
+        let active = sections.find(section => 
+            currentPosition >= section.offset && 
+            currentPosition < section.offset + section.height
+        );
+
+        // ✅ Jika sudah sampai paling bawah, paksa aktif ke Footer
+        const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
+        if (isAtBottom) {
+            active = sections.find(s => s.id === "Footer");
+        }
+
+        if (active) {
+            setActiveSection(active.id);
+        }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
 
     useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
+        document.body.style.overflow = isOpen ? 'hidden' : 'unset';
     }, [isOpen]);
 
     const scrollToSection = (e, href) => {
