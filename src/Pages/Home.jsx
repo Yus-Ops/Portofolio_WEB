@@ -19,10 +19,10 @@ const StatusBadge = memo(() => (
 const MainTitle = memo(() => (
   <div className="space-y-2" data-aos="fade-up" data-aos-delay="600">
     <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-slate-900">
-      Machine
+      Machine Learning
       <br />
       <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent inline-block">
-        Learning
+        Engineer
       </span>
     </h1>
   </div>
@@ -80,8 +80,8 @@ const SocialLink = memo(({ icon: Icon, link }) => (
 const TYPING_SPEED = 100;
 const ERASING_SPEED = 50;
 const PAUSE_DURATION = 2000;
-const WORDS = ["Computer Science Student", "Machine Learning Enthusiast"];
-const TECH_STACK = ["Python", "Scikit-Learn", "TensorFlow", "Flask"];
+const WORDS = ["Computer Science Student", "Machine Learning", "Deep Learning", "NLP Models", "Sentiment Analysis"];
+const TECH_STACK = ["Python", "PyTorch", "Keras", "TensorFlow"];
 const SOCIAL_LINKS = [
   { icon: Github, link: " https://github.com/Yus-Ops" },
   { icon: Linkedin, link: "https://www.linkedin.com/in/yus-ops/" },
@@ -146,7 +146,7 @@ const Home = () => {
                 </div>
 
                 <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium" data-aos="fade-up" data-aos-delay="1000">
-                  Menciptakan model Machine Learning yang Inovatif, Adaptif dan efisien untuk Kebutuhan Digital Masa Kini.
+                  Building Intelligent Systems, From Prototype to Production.
                 </p>
 
                 <div className="flex flex-wrap gap-3 justify-start" data-aos="fade-up" data-aos-delay="1200">

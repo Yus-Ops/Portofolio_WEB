@@ -4,6 +4,7 @@ import "./index.css";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Portofolio from "./Pages/Portofolio";
+import Contact from "./components/Contact";
 import WelcomeScreen from "./Pages/WelcomeScreen";
 import NotFoundPage from "./Pages/404";
 import Footer from "./Pages/Footer";
@@ -46,6 +47,7 @@ const LandingPage = ({ showWelcome, setShowWelcome, activeSection, setActiveSect
           <Home id="Home" />
           <About id="About" />
           <Portofolio id="Portofolio" />
+          <Contact id="Contact" />
           <Footer id="Footer" />
         </div>
       )}

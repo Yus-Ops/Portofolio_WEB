@@ -1,5 +1,5 @@
-import React, { useEffect, memo, useMemo } from "react"
-import { FileText, Code, Award, Globe, ArrowUpRight, Sparkles } from "lucide-react"
+import React, { useEffect, memo } from "react"
+import { FileText, Code, Sparkles, GraduationCap, Briefcase, Trophy, BookOpen } from "lucide-react"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -65,46 +65,57 @@ const ProfileImage = memo(() => (
   </div>
 ));
 
-const StatCard = memo(({ icon: Icon, color, value, label, description, animation }) => (
-  <div data-aos={animation} data-aos-duration={1300} className="relative group">
-    <div className="relative z-10 bg-white rounded-2xl p-6 border border-slate-200 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl h-full flex flex-col justify-between shadow-md">
-      <div className={`absolute -z-10 inset-0 bg-gradient-to-br ${color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}></div>
-      
-      <div className="flex items-center justify-between mb-4">
-        <div className={`w-16 h-16 rounded-full flex items-center justify-center ${color.replace('bg-gradient-to-br', 'bg-gradient-to-br')} opacity-10 group-hover:opacity-20 transition-opacity`}>
-          <Icon className="w-8 h-8 text-emerald-600" />
-        </div>
-        <span 
-          className="text-4xl font-bold text-slate-800"
-          data-aos="fade-up-left"
-          data-aos-duration="1500"
-          data-aos-anchor-placement="top-bottom"
-        >
-          {value}
-        </span>
-      </div>
+// Data perjalanan / experience. Edit/isi sesuai pengalaman aslimu.
+const EXPERIENCES = [
+  {
+    icon: GraduationCap,
+    period: "2023 — Sekarang",
+    title: "S1 Teknik Informatika",
+    org: "Universitas Islam Sultan Agung (UNISSULA)",
+    description:
+      "Fokus pada Machine Learning & Deep Learning — Computer Vision, NLP, dan MLOps.",
+  },
+  {
+    icon: Trophy,
+    period: "Jul 2025 — Des 2025",
+    title: "Digital Talent Scholarship",
+    org: "Kementerian Komdigi RI",
+    description: "Program beasiswa pelatihan kompetensi digital di bidang AI/Machine Learning.",
+  },
+  {
+    icon: Briefcase,
+    period: "Okt 2025 — Nov 2025",
+    title: "Project-Based Internship: Data Scientist",
+    org: "Rakamin Academy",
+    description: "Menyelesaikan proyek studi kasus sebagai Data Scientist — analisis data dan pemodelan Machine Learning.",
+  },
+  {
+    icon: BookOpen,
+    period: "Feb 2026 — Jul 2026",
+    title: "Pijak – AI Training Program",
+    org: "Dicoding × IBM SkillsBuild",
+    description: "Program pelatihan AI hasil kolaborasi Dicoding dan IBM SkillsBuild.",
+  },
+];
 
-      <div>
-        <p 
-          className="text-sm uppercase tracking-wider text-slate-500 mb-2 font-medium"
-          data-aos="fade-up"
-          data-aos-duration="800"
-          data-aos-anchor-placement="top-bottom"
-        >
-          {label}
-        </p>
-        <div className="flex items-center justify-between">
-          <p 
-            className="text-xs text-slate-600"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-anchor-placement="top-bottom"
-          >
-            {description}
-          </p>
-          <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-500 transition-colors" />
-        </div>
-      </div>
+const TimelineItem = memo(({ icon: Icon, period, title, org, description, isLast }) => (
+  <div className="relative pl-14 pb-10" data-aos="fade-up" data-aos-duration="800">
+    {/* Garis vertikal penghubung */}
+    {!isLast && (
+      <span className="absolute left-[19px] top-12 bottom-0 w-px bg-gradient-to-b from-emerald-400 to-cyan-400/30" />
+    )}
+    {/* Ikon bulat */}
+    <span className="absolute left-0 top-0 w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center shadow-md shadow-emerald-500/20">
+      <Icon className="w-5 h-5 text-white" />
+    </span>
+
+    <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+      <span className="inline-block text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full mb-2">
+        {period}
+      </span>
+      <h4 className="text-lg font-bold text-slate-800">{title}</h4>
+      <p className="text-sm font-medium text-cyan-600 mb-2">{org}</p>
+      <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
     </div>
   </div>
 ));
@@ -161,23 +172,6 @@ const HomeStyleButton = ({ href, text, icon: Icon, isPrimary }) => (
 );
 
 const AboutPage = () => {
-  // Memoized calculations
-  const { totalProjects, totalCertificates, YearExperience } = useMemo(() => {
-    const storedProjects = JSON.parse(localStorage.getItem("projects") || "[]");
-    const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
-    
-    const startDate = new Date("2024-07-06");
-    const today = new Date();
-    const experience = today.getFullYear() - startDate.getFullYear() -
-      (today < new Date(today.getFullYear(), startDate.getMonth(), startDate.getDate()) ? 1 : 0);
-
-    return {
-      totalProjects: storedProjects.length,
-      totalCertificates: storedCertificates.length,
-      YearExperience: experience
-    };
-  }, []);
-
   // Optimized AOS initialization
   useEffect(() => {
     const initAOS = () => {
@@ -202,37 +196,9 @@ const AboutPage = () => {
     };
   }, []);
 
-  // Memoized stats data dengan tema hijau-biru
-  const statsData = useMemo(() => [
-    {
-      icon: Code,
-      color: "from-emerald-500 to-cyan-500",
-      value: totalProjects,
-      label: "Total Projects",
-      description: "Intelligent solutions powered by Machine Learning.",
-      animation: "fade-right",
-    },
-    {
-      icon: Award,
-      color: "from-emerald-500 to-cyan-500",
-      value: totalCertificates,
-      label: "Certificates",
-      description: "Professional skills validated",
-      animation: "fade-up",
-    },
-    {
-      icon: Globe,
-      color: "from-emerald-500 to-cyan-500",
-      value: YearExperience,
-      label: "Years of Experience",
-      description: "Continuous learning journey",
-      animation: "fade-left",
-    },
-  ], [totalProjects, totalCertificates, YearExperience]);
-
   return (
     <div
-      className="h-auto pb-[10%] bg-white overflow-hidden px-[5%] sm:px-[5%] lg:px-[10%] pt-10 sm:pt-0" 
+      className="h-auto pb-12 sm:pb-16 bg-white overflow-hidden px-[5%] sm:px-[5%] lg:px-[10%] pt-10 sm:pt-0"
       id="About"
     >
       <Header />
@@ -262,7 +228,7 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-             Saya adalah mahasiswa aktif Teknik Informatika di Universitas Islam Sultan Agung (UNISSULA) yang memiliki ketertarikan besar dalam pengembangan model Machine Learning dan Software Developer. Saya antusias menciptakan pengalaman digital yang interaktif serta terus berupaya mengembangkan solusi inovatif di setiap proyek yang saya kerjakan.
+             Saya mahasiswa Teknik Informatika di Universitas Islam Sultan Agung (UNISSULA) dengan ketertarikan mendalam di bidang Machine Learning, Deep Learning, NLP Model, CNN, dan Sentiment Analysis. Saya antusias membangun dan mengembangkan model yang tidak hanya akurat, tetapi juga dapat diterapkan langsung dalam solusi nyata — mulai dari tahap riset hingga deployment.
             </p>
 
             {/* Enhanced Quote Section with fixed closing quote */}
@@ -309,13 +275,30 @@ const AboutPage = () => {
           <ProfileImage />
         </div>
 
-        <a href="#Portofolio">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 cursor-pointer">
-            {statsData.map((stat) => (
-              <StatCard key={stat.label} {...stat} />
+        {/* Experience / Perjalanan */}
+        <div className="mt-20">
+          <div className="text-center mb-10" data-aos="fade-up" data-aos-duration="800">
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 inline-flex items-center gap-2">
+              <Trophy className="w-6 h-6 text-emerald-500" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500">
+                Perjalanan & Experience
+              </span>
+            </h3>
+            <p className="text-slate-600 max-w-xl mx-auto text-sm sm:text-base mt-2">
+              Jejak pendidikan, pelatihan, dan pengalaman yang membentuk fokus saya di Machine Learning.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            {EXPERIENCES.map((item, index) => (
+              <TimelineItem
+                key={index}
+                {...item}
+                isLast={index === EXPERIENCES.length - 1}
+              />
             ))}
           </div>
-        </a>
+        </div>
       </div>
 
       <style jsx>{`
