@@ -255,8 +255,8 @@ const AboutPage = () => {
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
               <div className="w-full lg:w-auto">
                 <HomeStyleButton 
-                href="https://drive.google.com/uc?export=download&id=12vK6BFajSo6m8c9wwyyu8d8CHTPJR7pT" 
-                text="Download CV" 
+                href="https://drive.google.com/uc?export=download&id=1An-GMjod8DGF23KUBmGvDKa5ocssiNn5"
+                text="Download CV"
                 icon={FileText} 
                 isPrimary={true}
                 />
