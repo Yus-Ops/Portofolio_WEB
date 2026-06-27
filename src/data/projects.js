@@ -10,7 +10,7 @@ export const projects = [
     Description:
       "Chatbot RAG tanya–jawab Panduan Akademik FTI UNISSULA yang menjawab hanya dari isi panduan resmi. Pipeline: ekspansi singkatan → retrieval (e5) → reranking (cross-encoder) → LLM via API dengan fallback otomatis antar-provider, menghasilkan jawaban streaming beserta sumbernya.",
     Img: "/projects/Chatbot.png",
-    Link: "https://chatbot-panduan-akademik-unissula-qzmujqbr2.vercel.app/",
+    Link: "https://chatbot-panduan-akademik-unissula.vercel.app/",
     Github: "https://github.com/Yus-Ops/Chatbot-Panduan-Akademik-UNISSULA",
     Features: [
       "Retrieval-Augmented Generation: jawaban hanya dari panduan akademik resmi",
